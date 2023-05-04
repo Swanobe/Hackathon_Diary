@@ -9,4 +9,14 @@ async function index (req, res) {
     }
 }
 
-module.exports = {index }
+async function show(req, res) {
+    try {
+        const id = parseInt(req.params.id)
+        const entry = await Entry.getById(id)
+        res.status(200).json(entry)
+    } catch (error) {
+        res.status(404).json({"error": error.message})
+    }
+}
+
+module.exports = {index , show}
