@@ -37,8 +37,8 @@ class Entry {
     }
 
     async update(data) {
-        const {user_name, pit, peak, entry_date} = data
-        const response = await db.query("UPDATE diary SET (user_name, pit, peak, entry_date) = ($1, $2, $3, $4) WHERE diary_id = $5 RETURNING *;", [ user_name, pit, peak,entry_date, this.id ]);
+        const {pit, peak} = data
+        const response = await db.query("UPDATE diary SET (pit, peak) = ($1, $2) WHERE diary_id = $3 RETURNING *;", [ pit, peak, this.id ]);
         if (response.rows.length != 1) {
             throw new Error("Unable to update votes.")
         }
