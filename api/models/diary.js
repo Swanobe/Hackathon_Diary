@@ -45,6 +45,11 @@ class Entry {
         return new Entry(response.rows[0]);
     }
 
+     async destroy() {
+        let response = await db.query("DELETE FROM diary WHERE diary_id = $1 RETURNING *;", [this.id]);
+        return new Entry(response.rows[0]);
+    }
+
 }
 
 module.exports = Entry;
