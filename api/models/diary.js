@@ -27,6 +27,16 @@ class Entry {
         return new Entry(response.rows[0])
     }
 
+    static async create(data) {
+        const {user_name, pit, peak } = data;
+        const response = await db.query("INSERT INTO diary (user_name, pit, peak) VALUES ($1, $2, $3) RETURNING *;", [user_name, pit, peak])
+        const entryId = response.rows[0].diary_id;
+        const newEntry = await Entry.getById(entryId)
+        return newEntry;
+    
+    
+    }
+
 }
 
 module.exports = Entry;
