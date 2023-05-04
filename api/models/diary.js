@@ -33,8 +33,16 @@ class Entry {
         const entryId = response.rows[0].diary_id;
         const newEntry = await Entry.getById(entryId)
         return newEntry;
-    
-    
+        
+    }
+
+    async update(data) {
+        const {user_name, pit, peak, entry_date} = data
+        const response = await db.query("UPDATE diary SET (user_name, pit, peak, entry_date) = ($1, $2, $3, $4) WHERE diary_id = $5 RETURNING *;", [ user_name, pit, peak,entry_date, this.id ]);
+        if (response.rows.length != 1) {
+            throw new Error("Unable to update votes.")
+        }
+        return new Entry(response.rows[0]);
     }
 
 }

@@ -29,4 +29,16 @@ async function create(req, res) {
     }
 }
 
-module.exports = {index , show, create}
+async function update(req, res) {
+    try {
+        const id = parseInt(req.params.id)
+        const entry = await Entry.getById(id)
+        const data = req.body;
+        const result = await entry.update(data);
+        res.status(200).json(result);
+    } catch (error) {
+       res.status(404).json({"error": error.message}) 
+    }
+}
+
+module.exports = {index , show, create, update}
