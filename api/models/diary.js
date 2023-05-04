@@ -18,6 +18,14 @@ class Entry {
         return response.rows.map(entry => new Entry(entry))
     }
 
+    static async getById(id) {
+        const response = await db.query("SELECT * FROM diary WHERE diary_id= $1;", [id])
+        if (response.rows.length != 1)
+        {
+            throw new Error("Unable to locate diary entry")
+        }
+        return new Entry(response.rows[0])
+    }
 
 }
 
