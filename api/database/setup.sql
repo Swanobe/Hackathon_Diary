@@ -16,3 +16,7 @@ CREATE TABLE user_account (
     password CHAR(60) NOT NULL,
     PRIMARY KEY (user_id)
 );
+
+INSERT INTO diary (user_name, pit, peak)
+VALUES
+('Joao', 'Debug assignment', 'Hackathon')
