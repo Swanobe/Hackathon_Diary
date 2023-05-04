@@ -9,6 +9,11 @@ const entryResultRow = document.querySelector(`.entryResultRow`);
 const getEntryTitle = document.getElementsByClassName(`entry-text-title`);
 const getEntryText = document.getElementsByClassName(`entry-text-box`);
 
+const heading = document.createElement(`h2`);
+heading.className = `heading-results`;
+heading.textContent = `Retro Entries`;
+entryResultRow.insertAdjacentElement(`beforebegin`, heading);
+
 function addEntryToDom(event) {
   event.preventDefault();
   const d = new Date();
@@ -28,11 +33,6 @@ function addEntryToDom(event) {
   const n = month[d.getMonth()];
   const day = d.getDay();
   const year = d.getFullYear();
-
-  const heading = document.createElement(`h2`);
-  heading.className = `heading-results`;
-  heading.textContent = `Retro Entries`;
-  entryResultRow.insertAdjacentElement(`beforebegin`, heading);
 
   // Adding Div
   const entryDiv = document.createElement(`div`);
